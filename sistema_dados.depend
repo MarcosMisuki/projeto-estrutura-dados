@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1793416796 source:c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\src\grafo.c
+
+1793504007 source:c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
