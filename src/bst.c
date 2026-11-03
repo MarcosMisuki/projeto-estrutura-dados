@@ -1,37 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-//Aqui trazemos as funções de bst.h
 #include "bst.h"
 
-//Inserção
-NoBST* bst_inserir(NoBST* raiz, Registro novo_registro, int* sucesso) {
-    if (raiz == NULL) {
-        // No caso de árvore vazia, ou chegamos na posição certa (uma folha)
-        NoBST* novo = (NoBST*)malloc(sizeof(NoBST));
-        if (novo == NULL){
-            *sucesso =0; //aconteceu uma falha na alocação de memória
-            return NULL;
-        }
+// Função interna para criar um novo nó na memória
+NoBST* criar_no(Registro reg) {
+    NoBST* novo = (NoBST*)malloc(sizeof(NoBST));
+    if (novo != NULL) {
+        novo->dados = reg;
+        novo->esq = NULL;
+        novo->dir = NULL;
+    }
+    return novo;
+}
 
-        novo->dados=novo_registro;
-        novo->esq=NULL;
-        novo->dir=NULL;
+// Inserção recursiva na BST (Requisito 07)
+NoBST* bst_inserir(NoBST* raiz, Registro novo_registro, int* sucesso) {
+    // Se a árvore/subárvore estiver vazia, cria o nó aqui
+    if (raiz == NULL) {
         *sucesso = 1;
-        return novo;
+        return criar_no(novo_registro);
     }
 
-    if (novo_registro.id < raiz->dados.id) {
-        //ID menor vai sempre a esquerda
+    // Regra de unicidade: IDs não podem se repetir
+    if (novo_registro.id == raiz->dados.id) {
+        *sucesso = 0; // Falha de ID já existente
+    }
+    // Se o ID novo for menor, desce para a esquerda
+    else if (novo_registro.id < raiz->dados.id) {
         raiz->esq = bst_inserir(raiz->esq, novo_registro, sucesso);
-    } else if (novo_registro.id > raiz->dados.id) {
-        //ID Maior sempre vai para a direita
-        raiz->dir =bst_inserir(raiz->dir, novo_registro, sucesso);
-    } else {
-        // ID já existe (NÃO PODE EXISTIR VALORES DUPLICADOS)
-        *sucesso=0;
+    }
+    // Se o ID novo for maior, desce para a direita
+    else {
+        raiz->dir = bst_inserir(raiz->dir, novo_registro, sucesso);
     }
 
     return raiz;
+}
+
+// Percurso Em-Ordem (Esquerda, Raiz, Direita) - lista os IDs em ordem crescente
+void bst_em_ordem(NoBST* raiz) {
+    if (raiz != NULL) {
+        bst_em_ordem(raiz->esq);
+        printf("ID: %d | Nome: %s | Tipo: %s | Local: %s\n",
+               raiz->dados.id, raiz->dados.nome,
+               raiz->dados.tipo_equipamento, raiz->dados.localizacao);
+        bst_em_ordem(raiz->dir);
+    }
 }

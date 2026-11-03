@@ -1,5 +1,5 @@
 #ifndef DADOS_H
-#define Dados_H
+#define DADOS_H
 
 //Apenas para declarar o formato dos dados
 // O #ifndef serve para impedir que esse código seja lido duas vezes por engano
