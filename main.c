@@ -55,7 +55,6 @@ int main() {
         printf("10 - Verificar caminho entre dois IDs\n");
         printf("11 - Consultar historico (pilha)\n");
         printf(" 0 - Encerrar\n");
-        printf("============================================\n");
         printf("Escolha uma opcao: ");
 
         if (!ler_inteiro(&opcao)) {
@@ -92,9 +91,28 @@ int main() {
                 }
                 break;
             }
-            case 2:
-                printf("\n-> Funcao (Buscar registro) em desenvolvimento para as proximas etapas...\n");
+            case 2: {
+                int id_busca;
+                printf("\nBUSCAR EQUIPAMENTO NA BST\n");
+                printf("Digite o ID que deseja buscar: ");
+                while(!ler_inteiro(&id_busca)) {
+                    printf("ID invalido. Digite apenas numeros: ");
+                }
+
+                NoBST* encontrado = bst_buscar(raiz, id_busca);
+
+                if (encontrado != NULL) {
+                    printf("\n[ENCONTRADO] Equipamento localizado com sucesso!\n");
+                    printf("ID: %d\n", encontrado->dados.id);
+                    printf("Nome: %s\n", encontrado->dados.nome);
+                    printf("Tipo: %s\n", encontrado->dados.tipo_equipamento);
+                    printf("Local: %s\n", encontrado->dados.localizacao);
+                    printf("----------------------------------------\n");
+                } else {
+                    printf("\n[AVISO] Nenhum equipamento com o ID %d foi encontrado na arvore.\n", id_busca);
+                }
                 break;
+            }
             case 3:
                 printf("\n-> Funcao (Remover registro) em desenvolvimento para as proximas etapas...\n");
                 break;

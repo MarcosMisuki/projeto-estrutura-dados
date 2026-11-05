@@ -14,5 +14,6 @@ typedef struct NoBST {
 //Existirá uma função para inserir
 NoBST* bst_inserir(NoBST* raiz, Registro novo_registro, int* sucesso);
 void bst_em_ordem(NoBST* raiz);
+NoBST* bst_buscar(NoBST* raiz, int id);
 
 #endif

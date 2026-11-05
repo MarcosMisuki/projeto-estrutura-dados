@@ -14,7 +14,7 @@ NoBST* criar_no(Registro reg) {
     return novo;
 }
 
-// Inserção recursiva na BST (Requisito 07)
+// Inserção recursiva na BST
 NoBST* bst_inserir(NoBST* raiz, Registro novo_registro, int* sucesso) {
     // Se a árvore/subárvore estiver vazia, cria o nó aqui
     if (raiz == NULL) {
@@ -47,4 +47,20 @@ void bst_em_ordem(NoBST* raiz) {
                raiz->dados.tipo_equipamento, raiz->dados.localizacao);
         bst_em_ordem(raiz->dir);
     }
+}
+
+// Busca recursiva
+NoBST* bst_buscar(NoBST* raiz, int id) {
+    // Se a árvore estiver vazia ou se achou o ID no nó atual
+    if (raiz == NULL || raiz->dados.id == id) {
+        return raiz;
+    }
+
+    // Se o ID procurado for menor, busca na subárvore esquerda
+    if (id < raiz->dados.id) {
+        return bst_buscar(raiz->esq, id);
+    }
+
+    // Caso contrário, busca na subárvore direita
+    return bst_buscar(raiz->dir, id);
 }
