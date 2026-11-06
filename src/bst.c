@@ -64,3 +64,88 @@ NoBST* bst_buscar(NoBST* raiz, int id) {
     // Caso contrário, busca na subárvore direita
     return bst_buscar(raiz->dir, id);
 }
+
+// Funcao auxiliar para achar o menor nó (usada na remocao)
+NoBST* bst_minimo(NoBST* raiz) {
+    NoBST* atual = raiz;
+    while (atual && atual->esq != NULL) atual = atual->esq;
+    return atual;
+}
+
+// Opcao 3: Remove da arvore
+NoBST* bst_remover(NoBST* raiz, int id, int* sucesso) {
+    if (raiz == NULL) return NULL;
+
+    if (id < raiz->dados.id) {
+        raiz->esq = bst_remover(raiz->esq, id, sucesso);
+    } else if (id > raiz->dados.id) {
+        raiz->dir = bst_remover(raiz->dir, id, sucesso);
+    } else {
+        *sucesso = 1;
+        // Nó com 1 ou 0 filhos
+        if (raiz->esq == NULL) {
+            NoBST* temp = raiz->dir;
+            free(raiz);
+            return temp;
+        } else if (raiz->dir == NULL) {
+            NoBST* temp = raiz->esq;
+            free(raiz);
+            return temp;
+        }
+        // Nó com 2 filhos
+        NoBST* temp = bst_minimo(raiz->dir);
+        raiz->dados = temp->dados;
+        raiz->dir = bst_remover(raiz->dir, temp->dados.id, sucesso);
+    }
+    return raiz;
+}
+
+// Funcoes auxiliares para Opcao 5
+void contar_nos(NoBST* raiz, int* cont) {
+    if (raiz != NULL) {
+        contar_nos(raiz->esq, cont);
+        (*cont)++;
+        contar_nos(raiz->dir, cont);
+    }
+}
+
+void preencher_vetor(NoBST* raiz, Registro* vetor, int* i) {
+    if (raiz != NULL) {
+        preencher_vetor(raiz->esq, vetor, i);
+        vetor[*i] = raiz->dados;
+        (*i)++;
+        preencher_vetor(raiz->dir, vetor, i);
+    }
+}
+
+// Opcao 5: Joga a arvore num vetor, ordena e exibe
+void bst_exibir_por_nome(NoBST* raiz) {
+    if (raiz == NULL) {
+        printf("\nNenhum equipamento cadastrado.\n");
+        return;
+    }
+
+    int qtd = 0;
+    contar_nos(raiz, &qtd);
+    Registro* vetor = (Registro*)malloc(qtd * sizeof(Registro));
+    int i = 0;
+    preencher_vetor(raiz, vetor, &i);
+
+    // Bubble Sort por nome
+    for (int a = 0; a < qtd - 1; a++) {
+        for (int b = 0; b < qtd - a - 1; b++) {
+            if (strcmp(vetor[b].nome, vetor[b+1].nome) > 0) {
+                Registro temp = vetor[b];
+                vetor[b] = vetor[b+1];
+                vetor[b+1] = temp;
+            }
+        }
+    }
+
+    printf("\n--- EQUIPAMENTOS ORDENADOS POR NOME ---\n");
+    for (int a = 0; a < qtd; a++) {
+        printf("Nome: %-15s | ID: %d | Tipo: %s\n", vetor[a].nome, vetor[a].id, vetor[a].tipo_equipamento);
+    }
+    free(vetor);
+}
+

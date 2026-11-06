@@ -16,4 +16,7 @@ NoBST* bst_inserir(NoBST* raiz, Registro novo_registro, int* sucesso);
 void bst_em_ordem(NoBST* raiz);
 NoBST* bst_buscar(NoBST* raiz, int id);
 
+NoBST* bst_remover(NoBST* raiz, int id, int* sucesso);
+void bst_exibir_por_nome(NoBST* raiz);
+
 #endif
