@@ -1,23 +1,26 @@
 # depslib dependency file v1.0
-1793739090 source:c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\src\grafo.c
+1793932834 source:c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\src\grafo.c
 	<stdio.h>
 	"grafo.h"
 
-1793504007 source:c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\main.c
+1793932512 source:c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"dados.h"
+	"bst.h"
+	"grafo.h"
 
-1793673599 source:c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\src\bst.c
+1793932860 source:c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\src\bst.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"bst.h"
 
-1793673929 c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\include\bst.h
+1793846814 c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\include\bst.h
 	"dados.h"
 
 1793673811 c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\include\dados.h
 
-1793739090 c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\include\grafo.h
+1793932813 c:\users\marcos misuki\documents\estruturas_de_dados\projeto prático individual\sistema_dados\include\grafo.h
 

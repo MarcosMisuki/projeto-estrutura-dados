@@ -42,7 +42,7 @@ int main() {
     grafo_inicializar(&rede); // Zera todas as conexões
 
     while (opcao != 0) {
-        printf("       SISTEMA DE ESTRUTURA DE DADOS\n");
+        printf("SISTEMA DE ESTRUTURA DE DADOS\n");
         printf(" 1 - Cadastrar registro (cria vertice)\n");
         printf(" 2 - Buscar registro (BST)\n");
         printf(" 3 - Remover registro e vertice/arestas\n");
@@ -113,23 +113,26 @@ int main() {
                 }
                 break;
             }
-            case 3:
+            case 3:{
                 printf("\n-> Funcao (Remover registro) em desenvolvimento para as proximas etapas...\n");
                 break;
-            case 5:
+            }
+            case 5:{
                 printf("\n-> Funcao (Ordenar registros) em desenvolvimento para as proximas etapas...\n");
                 break;
-            case 4:
-                printf("\n--- LISTAGEM DE EQUIPAMENTOS (ORDEM DE ID) ---\n");
+            }
+            case 4:{
+                printf("\nLISTAGEM DE EQUIPAMENTOS (ORDEM DE ID)\n");
                 if (raiz == NULL) {
                     printf("Nenhum equipamento cadastrado no sistema.\n");
                 } else {
                     bst_em_ordem(raiz);
                 }
                 break;
+            }
             case 6: {
                 int id1, id2;
-                printf("\n--- ADICIONAR CONEXAO DE REDE ---\n");
+                printf("\nADICIONAR CONEXAO DE REDE\n");
                 printf("Digite o ID do primeiro equipamento: ");
                 ler_inteiro(&id1);
                 printf("Digite o ID do segundo equipamento: ");
@@ -141,7 +144,7 @@ int main() {
             }
             case 7: {
                 int id1, id2;
-                printf("\n--- REMOVER CONEXAO DE REDE ---\n");
+                printf("\nREMOVER CONEXAO DE REDE\n");
                 printf("Digite o ID do primeiro equipamento: ");
                 ler_inteiro(&id1);
                 printf("Digite o ID do segundo equipamento: ");
@@ -153,7 +156,7 @@ int main() {
             }
             case 8: {
                 int id1, id2;
-                printf("\n--- CONSULTAR CONEXAO DIRETA ---\n");
+                printf("\nCONSULTAR CONEXAO DIRETA\n");
                 printf("Digite o ID do primeiro equipamento: ");
                 ler_inteiro(&id1);
                 printf("Digite o ID do segundo equipamento: ");
@@ -163,6 +166,32 @@ int main() {
                     printf("\n-> Status: CONECTADOS. Ha um cabo de rede entre %d e %d.\n", id1, id2);
                 } else {
                     printf("\n-> Status: DESCONECTADOS. Nao ha ligacao direta entre %d e %d.\n", id1, id2);
+                }
+                break;
+            }
+            case 9: {
+                int id_inicio;
+                printf("\nLISTAR EQUIPAMENTOS ALCANCAVEIS (BFS)\n");
+                printf("Digite o ID de origem (por onde comecar): ");
+                while(!ler_inteiro(&id_inicio)) {
+                    printf("ID invalido. Digite apenas numeros: ");
+                }
+
+                grafo_bfs(&rede, id_inicio);
+                break;
+            }
+            case 10: {
+                int id1, id2;
+                printf("\nVERIFICAR CAMINHO DE REDE\n");
+                printf("Digite o ID de origem: ");
+                ler_inteiro(&id1);
+                printf("Digite o ID de destino: ");
+                ler_inteiro(&id2);
+
+                if (grafo_existe_caminho(&rede, id1, id2)) {
+                    printf("\n-> Status: CAMINHO LIVRE. Existe uma rota para os pacotes irem de %d ate %d.\n", id1, id2);
+                } else {
+                    printf("\n-> Status: REDE INACESSIVEL. Nao existe rota entre %d e %d.\n", id1, id2);
                 }
                 break;
             }
